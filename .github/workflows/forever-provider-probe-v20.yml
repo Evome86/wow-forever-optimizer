@@ -1,0 +1,35 @@
+name: Forever Native Provider Probe v2.0
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Install Lua 5.1
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y lua5.1
+      - name: Run probe unit tests
+        run: python3 -m unittest discover -s tests -p 'test_provider_probe_v20.py' -v
+      - name: Discover native provider and run upstream tests
+        run: python3 scripts/probe_native_provider_v20.py
+      - name: Upload native provider evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forever-provider-probe-v20
+          path: |
+            reports/forever-provider-probe-v20.json
+            reports/forever-native-v20.log
+          if-no-files-found: warn
+          retention-days: 14
