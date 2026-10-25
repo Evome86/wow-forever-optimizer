@@ -1,0 +1,30 @@
+name: Forever Semantic Graph v1.2
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Test v1.2
+        run: python3 -m unittest discover -s tests -p 'test_semantic_graph_v12.py' -v
+      - name: Import quests
+        run: python3 scripts/import_quests.py
+      - name: Build typed graph and correction audit
+        run: python3 scripts/build_semantic_graph_v12.py
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: forever-semantic-graph-v12
+          path: reports/forever-semantic-graph-v12.json
+          if-no-files-found: error
+          retention-days: 14
