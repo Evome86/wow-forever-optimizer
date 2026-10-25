@@ -1,0 +1,29 @@
+name: Forever quest import
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  import:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout optimizer
+        uses: actions/checkout@v4
+      - name: Checkout pinned QuestieDB
+        uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Import Forever quest records
+        run: python3 scripts/import_quests.py
+      - name: Upload reports and parsed records
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forever-quest-import
+          path: reports/
+          if-no-files-found: error
+          retention-days: 14
