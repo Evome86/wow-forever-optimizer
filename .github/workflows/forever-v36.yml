@@ -1,0 +1,36 @@
+name: Forever v3.6 Original Lua Runtime Gate
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lua-runtime-gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/Questie
+          path: vendor/Questie
+          persist-credentials: false
+      - name: Record addon revision
+        run: git -C vendor/Questie rev-parse HEAD > addon-commit-v36.txt
+      - name: Test evidence integrity
+        run: python3 -m unittest discover -s tests -p 'test_v36.py' -v
+      - name: Generate strict runtime gate report
+        run: python3 scripts/verify_v36.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: forever-v36-lua-runtime-gate
+          path: |
+            reports/forever-v36-lua-runtime.json
+            addon-commit-v36.txt
+          retention-days: 14
