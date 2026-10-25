@@ -1,0 +1,30 @@
+name: Forever Corrections Audit v1.3
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Test v1.3
+        run: python3 -m unittest discover -s tests -p 'test_corrections_v13.py' -v
+      - name: Import quests
+        run: python3 scripts/import_quests.py
+      - name: Audit correction-sensitive quests and extra fields
+        run: python3 scripts/audit_corrections_v13.py
+      - name: Upload audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: forever-corrections-v13
+          path: reports/forever-corrections-v13.json
+          if-no-files-found: error
+          retention-days: 14
