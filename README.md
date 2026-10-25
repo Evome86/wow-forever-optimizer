@@ -1,11 +1,8 @@
-# WoW Forever Optimizer v1.5 — Source-backed Correction Overlay
+# WoW Forever Optimizer v1.6 — Runtime Evidence & Race Audit
 
-Extracts **only seven known Skyborne quest IDs** from three pinned QuestieDB Forever source files. Does not run Lua, does not pretend that trace rows are playable quest records. Extracts supported literal fields with file hashes and line numbers; quarantines unsupported expressions, multiline fields and conflicts. Existing raw quest records are not overwritten.
-
-**Important:** This is a safe, narrowly scoped **evidence overlay**, not a complete correction engine. NPC association changes and the runtime's correction merge ordering remain unverified. No routes or XP claims.
+A conservative **source evidence** audit. Searches Lua source for race constants and loader references, and expands up to three rounds of literal quest dependency IDs from the seven known Skyborne quests. Every finding includes source paths and line numbers. **Does not execute Lua, resolve bitmasks, infer loader order, certify playable quests, or calculate XP.** The 94414 `raceIDs.NONE` override remains unresolved.
 
 ## Install
+Unzip at the root of your existing repository, preserving paths; keep all earlier version files (particularly `scripts/import_quests.py` and `scripts/build_correction_overlay_v15.py`). Commit. In GitHub Actions run **Forever Runtime Evidence v1.6**. Download artifact `forever-runtime-evidence-v16` and upload `forever-runtime-evidence-v16.json` to this conversation.
 
-Copy all files in this ZIP to the root of the existing GitHub repository, preserving folders. **Do not delete existing files**. Commit and push. GitHub Actions → **Forever Correction Overlay v1.5** → Run workflow. Download artifact `forever-overlay-v15`, then upload `forever-overlay-v15.json` here.
-
-Depends on existing `scripts/import_quests.py` from v0.4.1. Pinned upstream commit `5c094f6e9a264f0dc54e2fde9731a37a97ed197c`.
+Pinned QuestieDB: `5c094f6e9a264f0dc54e2fde9731a37a97ed197c`. Python standard library only.
