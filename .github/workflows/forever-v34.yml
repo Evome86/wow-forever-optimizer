@@ -1,0 +1,35 @@
+name: Forever v3.4 Targeted Runtime Codepaths
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Checkout addon (commit recorded, not Forever-pinned)
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          repository: Questie/Questie
+          path: vendor/Questie
+          persist-credentials: false
+      - name: Run tests
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Trace targeted source code paths
+        run: python3 scripts/audit_semantics_v34.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: forever-v34-runtime-codepaths
+          path: reports/forever-v34-runtime-codepaths.json
+          if-no-files-found: warn
+          retention-days: 14
