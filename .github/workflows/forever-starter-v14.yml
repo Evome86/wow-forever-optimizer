@@ -1,0 +1,31 @@
+name: Forever Skyborne Starter Audit v1.4
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Test v1.4
+        run: python3 -m unittest discover -s tests -p 'test_starter_v14.py' -v
+      - name: Import pinned Forever quest data
+        run: python3 scripts/import_quests.py
+      - name: Audit Skyborne starter quest sources and Forever corrections
+        run: python3 scripts/audit_starter_v14.py
+      - name: Upload v1.4 report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forever-starter-v14
+          path: reports/forever-starter-v14.json
+          if-no-files-found: warn
+          retention-days: 14
