@@ -1,0 +1,44 @@
+name: Forever data audit
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout optimizer
+        uses: actions/checkout@v4
+      - name: Checkout pinned QuestieDB
+        uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Run audit unit tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Import Forever quests
+        run: python3 scripts/import_quests.py
+      - name: Audit imported quests
+        run: |
+          set +e
+          python3 scripts/audit_quests.py --input reports/forever-quests.json --output reports/forever-audit.json
+          result=$?
+          set -e
+          if [ "$result" -eq 2 ]; then
+            echo 'Structural findings detected; see uploaded report.'
+            exit 0
+          fi
+          exit "$result"
+        shell: bash --noprofile --norc -e -o pipefail {0}
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forever-v05-audit
+          path: |
+            reports/forever-audit.json
+            reports/forever-import-report.json
+          if-no-files-found: warn
+          retention-days: 14
