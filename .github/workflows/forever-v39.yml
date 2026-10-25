@@ -1,0 +1,45 @@
+name: Forever v3.9 Source-Verified Lua Harness
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lua-source-verified:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/Questie
+          ref: 30ac9acb7107fdfdd0cfff4d1e03d9bf60b0e374
+          path: vendor/Questie
+          persist-credentials: false
+      - name: Install Lua 5.1
+        run: sudo apt-get update && sudo apt-get install -y lua5.1
+      - name: Record revisions
+        run: |
+          git -C vendor/Questie rev-parse HEAD > addon-commit-v39.txt
+          git -C vendor/QuestieDB rev-parse HEAD > db-commit-v39.txt
+      - name: Run regression tests
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -q
+      - name: Capture original source context
+        run: python3 scripts/source_context_v38.py --out reports/forever-v39-source-context.json
+      - name: Execute original functions with dependency probes
+        run: python3 scripts/execute_original_v39.py --out reports/forever-v39-original-lua.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: forever-v39-original-lua-evidence
+          path: |
+            reports/forever-v39-original-lua.json
+            reports/forever-v39-source-context.json
+            addon-commit-v39.txt
+            db-commit-v39.txt
+          retention-days: 14
