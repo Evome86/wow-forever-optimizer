@@ -1,0 +1,35 @@
+name: Forever Semantics Audit v1.0
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Run v1.0 tests
+        run: python3 -m unittest discover -s tests -p 'test_semantics_v10.py' -v
+      - name: Import pinned quests
+        run: python3 scripts/import_quests.py
+      - name: Build character candidates
+        run: python3 scripts/filter_skyborne_v08.py
+      - name: Build raw quest graph
+        run: python3 scripts/analyze_quest_graph_v09.py
+      - name: Audit source evidence and cross-boundary references
+        run: python3 scripts/audit_semantics_v10.py
+      - name: Upload audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forever-semantics-v10
+          path: reports/forever-semantics-v10.json
+          if-no-files-found: warn
+          retention-days: 14
