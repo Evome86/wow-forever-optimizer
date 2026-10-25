@@ -1,0 +1,48 @@
+name: Forever Combined Semantics and Quest Graph v2.5
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  graph:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Install Lua 5.1
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y lua5.1
+      - name: Run regression tests
+        run: |
+          python3 -m unittest discover -s tests -p 'test_native_quest_export_v23.py' -v
+          python3 -m unittest discover -s tests -p 'test_eligibility_v24.py' -v
+          python3 -m unittest discover -s tests -p 'test_graph_v25.py' -v
+      - name: Export native Forever quest values
+        run: python3 scripts/run_native_quest_export_v23.py
+      - name: Build conservative audit
+        run: python3 scripts/build_eligibility_v24.py
+      - name: Build full graph, candidate tiers and source evidence
+        run: python3 scripts/build_graph_v25.py --source-dir vendor/QuestieDB
+      - name: Upload complete combined evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forever-combined-v25
+          path: |
+            reports/forever-native-export-v23-report.json
+            reports/forever-native-quests-v23.json
+            reports/forever-native-quests-v23.log
+            reports/forever-eligibility-v24-summary.json
+            reports/forever-graph-v25.json
+            reports/forever-graph-v25-summary.json
+            reports/forever-candidates-v25.csv
+            reports/forever-semantics-evidence-v25.json
+          if-no-files-found: warn
+          retention-days: 14
