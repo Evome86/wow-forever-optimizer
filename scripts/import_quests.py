@@ -111,8 +111,8 @@ class Parser:
                 if key in keyed:
                     raise ParseError(f'Duplicate keyed entry {key}')
                 keyed[key] = val
-            elif self.t[0] == 'IDENT':
-                # Lua name=value fields (not arbitrary executable expressions).
+            elif self.t[0] == 'IDENT' and self.t[1] not in ('nil', 'true', 'false'):
+                # Only name=value keys; Lua literals are positional values.
                 key = self.take('IDENT')
                 self.take('=')
                 if key in keyed:
