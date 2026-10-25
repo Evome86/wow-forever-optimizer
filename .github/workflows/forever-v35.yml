@@ -1,0 +1,24 @@
+name: Forever v3.5 Reference Harness
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/verify_v35.py'
+      - 'tests/test_v35.py'
+      - '.github/workflows/forever-v35.yml'
+jobs:
+  reference-harness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run fixture tests
+        run: python -m unittest discover -s tests -p 'test_v35.py' -v
+      - name: Export audit
+        run: python scripts/verify_v35.py --out reports/forever-v35-reference-harness.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: forever-v35-reference-harness
+          path: reports/forever-v35-reference-harness.json
