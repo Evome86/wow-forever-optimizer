@@ -1,0 +1,35 @@
+name: QuestieDB Forever source audit
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout optimizer
+        uses: actions/checkout@v4
+      - name: Checkout QuestieDB
+        uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: master
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Record QuestieDB commit
+        id: source
+        run: echo "sha=$(git -C vendor/QuestieDB rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Inventory source files
+        env:
+          QUESTIEDB_COMMIT: ${{ steps.source.outputs.sha }}
+        run: python3 scripts/audit.py
+      - name: Publish audit JSON
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/source-audit.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update QuestieDB Forever source inventory"
+            git push
+          fi
