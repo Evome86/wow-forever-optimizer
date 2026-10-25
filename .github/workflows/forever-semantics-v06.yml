@@ -1,0 +1,35 @@
+name: Forever semantics v0.6
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout optimizer
+        uses: actions/checkout@v4
+      - name: Checkout pinned QuestieDB
+        uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Run v0.6 unit tests
+        run: python3 -m unittest discover -s tests -p 'test_semantics_v06.py' -v
+      - name: Import Forever quests
+        run: python3 scripts/import_quests.py
+      - name: Inspect source-defined quest relationships and masks
+        run: python3 scripts/inspect_semantics.py
+      - name: Upload v0.6 report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forever-semantics-v06
+          path: |
+            reports/forever-semantics-v06.json
+            reports/forever-import-report.json
+          if-no-files-found: warn
+          retention-days: 14
