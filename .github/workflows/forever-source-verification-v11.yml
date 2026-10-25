@@ -1,0 +1,37 @@
+name: Forever Source Verification v1.1
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Test v1.1
+        run: python3 -m unittest discover -s tests -p 'test_source_verification_v11.py' -v
+      - name: Import quests
+        run: python3 scripts/import_quests.py
+      - name: Filter Skyborne
+        run: python3 scripts/filter_skyborne_v08.py
+      - name: Analyze raw graph
+        run: python3 scripts/analyze_quest_graph_v09.py
+      - name: Audit v1.0
+        run: python3 scripts/audit_semantics_v10.py
+      - name: Extract exact upstream source evidence
+        run: python3 scripts/verify_semantics_v11.py
+      - name: Upload v1.1 report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forever-source-verification-v11
+          path: reports/forever-source-verification-v11.json
+          if-no-files-found: warn
+          retention-days: 14
