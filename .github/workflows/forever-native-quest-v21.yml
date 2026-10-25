@@ -1,0 +1,35 @@
+name: Forever Native Quest Accessor v2.1
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-quest:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Install Lua 5.1
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y lua5.1
+      - name: Run parser tests
+        run: python3 -m unittest discover -s tests -p 'test_native_quest_probe_v21.py' -v
+      - name: Query native Forever Source provider
+        run: python3 scripts/run_native_quest_probe_v21.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forever-native-quest-v21
+          path: |
+            reports/forever-native-quest-v21.json
+            reports/forever-native-quest-v21.log
+          if-no-files-found: warn
+          retention-days: 14
