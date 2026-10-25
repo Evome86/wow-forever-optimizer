@@ -1,0 +1,43 @@
+name: Forever Eligibility Audit v2.4
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Install Lua 5.1
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y lua5.1
+      - name: Test v2.3 exporter and v2.4 audit
+        run: |
+          python3 -m unittest discover -s tests -p 'test_native_quest_export_v23.py' -v
+          python3 -m unittest discover -s tests -p 'test_eligibility_v24.py' -v
+      - name: Re-export native quests using v2.3
+        run: python3 scripts/run_native_quest_export_v23.py
+      - name: Build conservative v2.4 eligibility report
+        run: python3 scripts/build_eligibility_v24.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forever-eligibility-v24
+          path: |
+            reports/forever-eligibility-v24.json
+            reports/forever-eligibility-v24.csv
+            reports/forever-eligibility-v24-summary.json
+            reports/forever-eligibility-v24-error.json
+            reports/forever-native-export-v23-report.json
+            reports/forever-native-quests-v23.log
+          if-no-files-found: warn
+          retention-days: 14
