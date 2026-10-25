@@ -1,0 +1,459 @@
+{
+  "schema_version": 1,
+  "source": "Questie/QuestieDB",
+  "source_commit": "5c094f6e9a264f0dc54e2fde9731a37a97ed197c",
+  "generated_at_utc": "2026-10-25T16:57:56.103028+00:00",
+  "status": "inventory_only",
+  "verified_quest_count": null,
+  "verified_xp_curve": false,
+  "verified_class_race_faction_rules": false,
+  "verified_travel_graph": false,
+  "candidate_file_count": 89,
+  "files": [
+    {
+      "path": "data/Forever/conversion.json",
+      "bytes": 56775,
+      "sha256": "0229566017126c2577e77d2bcc7c9f995648fb27ed32a7918fa44ace0664fb22"
+    },
+    {
+      "path": "data/Forever/foreverItemDB.lua",
+      "bytes": 2181706,
+      "sha256": "987d037b6df94d5b0b1dc326a1670581e3abb952736a4ae055fd9f161328b71c"
+    },
+    {
+      "path": "data/Forever/foreverNpcDB.lua",
+      "bytes": 2033176,
+      "sha256": "a8c4169690726323dac3c6441f74f7a4d9cafcc08ec42231d72ff28c9471f0ee"
+    },
+    {
+      "path": "data/Forever/foreverObjectDB.lua",
+      "bytes": 1011387,
+      "sha256": "af4536c12c5b1da5fd32cb33be5c9c01d2436f97a5b9f60e2cdd238273b2cc09"
+    },
+    {
+      "path": "data/Forever/foreverQuestDB.lua",
+      "bytes": 1057548,
+      "sha256": "d5be8516877505334f02073826ea0f22a394ddbf604bb5a33f5a39de5bb1ee87"
+    },
+    {
+      "path": "docs/forever-coordinate-audit.md",
+      "bytes": 9878,
+      "sha256": "ac4b4e56f34911c104ae374d2d936443fbf91a43e0cb76562b964ea95739aab6"
+    },
+    {
+      "path": "docs/forever-data.md",
+      "bytes": 26880,
+      "sha256": "c561210f5f49087c0a215477eb7c8b7948e5dd9afd5831e77b136af4b6ad4adc"
+    },
+    {
+      "path": "docs/forever-delta-base-validation.md",
+      "bytes": 53205,
+      "sha256": "b87d01be6860399b8ce49ad20aeb3b82929b665d70f2fef6adfa75044c223442"
+    },
+    {
+      "path": "docs/forever-delta-base.md",
+      "bytes": 14948,
+      "sha256": "22a9fbf77c2116aa880d9081716a1736cb0cb5603b9bb77c2f376ad816b2361f"
+    },
+    {
+      "path": "docs/forever-map-override-audit.md",
+      "bytes": 9792,
+      "sha256": "c15c7a5fcc28ea2f8fd93c20a4c47930140457a6910f262bab99f91d08af5b2d"
+    },
+    {
+      "path": "docs/forever-spatial-validation.md",
+      "bytes": 9567,
+      "sha256": "44505c7ae2da024ce771c336da0a82ad08f723c3789e3104bd86a4b194d34022"
+    },
+    {
+      "path": "docs/forever-validation.md",
+      "bytes": 7922,
+      "sha256": "106912f12eb205b22d683bf6582c4a8ab13b27c38ab71fd792e1603db05c6933"
+    },
+    {
+      "path": "docs/forever.md",
+      "bytes": 12319,
+      "sha256": "84d4b088d04615ecaa2483329fb9c1b0af15abbe121e53fb912e9f14c61e383b"
+    },
+    {
+      "path": "l10n/Forever/lookupItems/deDE.lua",
+      "bytes": 849125,
+      "sha256": "bde240521939a825153ed150f17f634a284b60ac03e31589fc3fb6451eae13ee"
+    },
+    {
+      "path": "l10n/Forever/lookupItems/esES.lua",
+      "bytes": 872314,
+      "sha256": "c75b3986f4dc78114c53b47219cfc967132af0dc6981581288a01762b097cd7a"
+    },
+    {
+      "path": "l10n/Forever/lookupItems/esMX.lua",
+      "bytes": 872772,
+      "sha256": "9cd6d98c5b8a563e1788fd1e74661b2dbd555afcc8eee793157618647bd84efa"
+    },
+    {
+      "path": "l10n/Forever/lookupItems/frFR.lua",
+      "bytes": 875524,
+      "sha256": "5c5f8fbdbd9ae5f9c7f999b05073bb00f73fb4e7584684a931b74710a61927e8"
+    },
+    {
+      "path": "l10n/Forever/lookupItems/koKR.lua",
+      "bytes": 851390,
+      "sha256": "9d964fc1a27cfc3495be5fd78797cf6aa3840e847efa6402499ff5ca687e3cec"
+    },
+    {
+      "path": "l10n/Forever/lookupItems/ptBR.lua",
+      "bytes": 868389,
+      "sha256": "72fafea0ac656b9d837e7c9f807c22734260282eef59b0602892fda2de60d79a"
+    },
+    {
+      "path": "l10n/Forever/lookupItems/ruRU.lua",
+      "bytes": 1289341,
+      "sha256": "a6531b8e6b16850b06955f57c37efe9051cdde33fedc3c67bcfe4caa7f4763ab"
+    },
+    {
+      "path": "l10n/Forever/lookupItems/zhCN.lua",
+      "bytes": 704311,
+      "sha256": "a832cec0e32fefc273f6e9f725f27011b8674da5fdc610d81af59f4878a347c2"
+    },
+    {
+      "path": "l10n/Forever/lookupItems/zhTW.lua",
+      "bytes": 701154,
+      "sha256": "aad41105512e3329f4d20ddc2b84d876c51bbb6dc6429d0e33e29b54515e2f24"
+    },
+    {
+      "path": "l10n/Forever/lookupNpcs/deDE.lua",
+      "bytes": 376398,
+      "sha256": "40d2e3d0b840cd415bed0ef95559ce5b28855df268d143d6792e58a5e5fbd2e2"
+    },
+    {
+      "path": "l10n/Forever/lookupNpcs/esES.lua",
+      "bytes": 386128,
+      "sha256": "4d2a5221f30749972dd0e99c848d4e9018e16afd7c8631dbad2d87d7ceb02c39"
+    },
+    {
+      "path": "l10n/Forever/lookupNpcs/esMX.lua",
+      "bytes": 387093,
+      "sha256": "57cc68eb0d8b294d4b92a505504e95a5dbfb649d8a2438bc1b0a6aaa4ade95e1"
+    },
+    {
+      "path": "l10n/Forever/lookupNpcs/frFR.lua",
+      "bytes": 385817,
+      "sha256": "b0f11d36f5479c305fd49bce1be4b8770dc3a88d34ab868c0886251bb0bd1f41"
+    },
+    {
+      "path": "l10n/Forever/lookupNpcs/koKR.lua",
+      "bytes": 407661,
+      "sha256": "66ba5815f69d0005d3bf031e8f1a827c3d5398c9aa85d72df3d043b39919ce69"
+    },
+    {
+      "path": "l10n/Forever/lookupNpcs/ptBR.lua",
+      "bytes": 381826,
+      "sha256": "07f072cb50af8a0f2010d3e40f5e55b441b276e16916c97dbb8ee78eaf3ed843"
+    },
+    {
+      "path": "l10n/Forever/lookupNpcs/ruRU.lua",
+      "bytes": 573906,
+      "sha256": "f7bab2b149e619cfe2893792a79493b620f8d4411c518c4e0b2159e327a1e2ae"
+    },
+    {
+      "path": "l10n/Forever/lookupNpcs/zhCN.lua",
+      "bytes": 353038,
+      "sha256": "361b9e7c7cbf436ede17c39cf260503e8e4bae5c6dda5da87340e7a10145c9ba"
+    },
+    {
+      "path": "l10n/Forever/lookupNpcs/zhTW.lua",
+      "bytes": 658950,
+      "sha256": "abb13760a94c280486e3050cfd7713a5bcd44c5304907283f1eb43faafe97037"
+    },
+    {
+      "path": "l10n/Forever/lookupObjects/deDE.lua",
+      "bytes": 41744,
+      "sha256": "d1103421e8f0c9d72631d675d77550d660f6005489d58db5777428502c997fbb"
+    },
+    {
+      "path": "l10n/Forever/lookupObjects/esES.lua",
+      "bytes": 41821,
+      "sha256": "7cf36f71fca8804290ed0808d54412f5e8fb1ebd85b47679a904e2775a10bfab"
+    },
+    {
+      "path": "l10n/Forever/lookupObjects/esMX.lua",
+      "bytes": 177791,
+      "sha256": "e470b0941733c6570d3036bd00d2802ddf6f5892a7998c4ba900f114efb85883"
+    },
+    {
+      "path": "l10n/Forever/lookupObjects/frFR.lua",
+      "bytes": 42910,
+      "sha256": "939f60087044c80a9fe4d037279e80d1e8a389c13ae8140710be8fcee2e6fe2b"
+    },
+    {
+      "path": "l10n/Forever/lookupObjects/koKR.lua",
+      "bytes": 40491,
+      "sha256": "ebcc02149e3b640a150145f48305ab1ecd994ffe3960b54a6befd57ded830894"
+    },
+    {
+      "path": "l10n/Forever/lookupObjects/ptBR.lua",
+      "bytes": 41106,
+      "sha256": "f29727995a24fcae8e6bfa73ca822db5c2675ed60dcf020827d0be6934675633"
+    },
+    {
+      "path": "l10n/Forever/lookupObjects/ruRU.lua",
+      "bytes": 62686,
+      "sha256": "0954dd60c4c70b7cc83e1a4be21bcd8b7687204dd52a3ff8f568b8872a6539e6"
+    },
+    {
+      "path": "l10n/Forever/lookupObjects/zhCN.lua",
+      "bytes": 33173,
+      "sha256": "4176886299a30333d89faba7c15e3800c624de858a58c375d07ed25bda331ebc"
+    },
+    {
+      "path": "l10n/Forever/lookupObjects/zhTW.lua",
+      "bytes": 316290,
+      "sha256": "2970769953923c0f20c54f17482863af8e88177231a974514f89e7be0b2497f5"
+    },
+    {
+      "path": "l10n/Forever/lookupQuests/deDE.lua",
+      "bytes": 590252,
+      "sha256": "442b9cde93e9d3d5f19e10cf05cb0ebac090deba33cea1d8ef1516497f894c30"
+    },
+    {
+      "path": "l10n/Forever/lookupQuests/esES.lua",
+      "bytes": 591603,
+      "sha256": "aa73cd9be0da92d0b5af501b92c896dd0c58a6881d28d8c907ee242f283e2fcd"
+    },
+    {
+      "path": "l10n/Forever/lookupQuests/esMX.lua",
+      "bytes": 598452,
+      "sha256": "ef92623bcc540f2db4469888288c4e5cbfa908e813183831dff050df77e60cf9"
+    },
+    {
+      "path": "l10n/Forever/lookupQuests/frFR.lua",
+      "bytes": 605796,
+      "sha256": "6fe551071f34624032ce6489178b24b9180243aa2506d891955b510c3022a6b2"
+    },
+    {
+      "path": "l10n/Forever/lookupQuests/koKR.lua",
+      "bytes": 693782,
+      "sha256": "c35252a1cfc8a4eb1f736b2d01a66cf81f98450ea1382e3ccbc31eb1253a7408"
+    },
+    {
+      "path": "l10n/Forever/lookupQuests/ptBR.lua",
+      "bytes": 582743,
+      "sha256": "45b9ac77c38e4e394723f3fe025dcfb352d11240957ad319acf2e14207550544"
+    },
+    {
+      "path": "l10n/Forever/lookupQuests/ruRU.lua",
+      "bytes": 915768,
+      "sha256": "63386807c62fcb0078ae84cef1e4daa0d98064f4757e77560370800ff4279a41"
+    },
+    {
+      "path": "l10n/Forever/lookupQuests/zhCN.lua",
+      "bytes": 501532,
+      "sha256": "97691d81c5fd42233a2e311d301bfe01b323255a4e4df1d0a453c720a71ede48"
+    },
+    {
+      "path": "l10n/Forever/lookupQuests/zhTW.lua",
+      "bytes": 500887,
+      "sha256": "a80a8e500194b410bbdbe75f1f5ca325e8580e6db6763327684a1eae79ad4dd7"
+    },
+    {
+      "path": "src/corrections/Forever/foreverItemFixes.lua",
+      "bytes": 6622,
+      "sha256": "098bb9833f937d4ee18388568953828bd0930f1e23d5ee93dfb87e76da6efb90"
+    },
+    {
+      "path": "src/corrections/Forever/foreverNPCFixes.lua",
+      "bytes": 36647,
+      "sha256": "5246dd8c90e39a42e7195615e881495f6083676205ae74a4ebf42396c4d2fea4"
+    },
+    {
+      "path": "src/corrections/Forever/foreverObjectFixes.lua",
+      "bytes": 26447,
+      "sha256": "bac79e9a3a4385b6f00fed280bacd9d0556627829ade019f498dcf394d6a6802"
+    },
+    {
+      "path": "src/corrections/Forever/foreverQuestFixes.lua",
+      "bytes": 150257,
+      "sha256": "27d50fe25842bf8a6a09ed5f45cf8d189a5c0081b052f9370347734100d98d46"
+    },
+    {
+      "path": "src/corrections/Forever/generated/foreverBaseItem.lua",
+      "bytes": 2526376,
+      "sha256": "4824f55dbb542dcf62e65eb9b9129c330e2188ff431163c2bfe1501088208424"
+    },
+    {
+      "path": "src/corrections/Forever/generated/foreverBaseNpc.lua",
+      "bytes": 1067988,
+      "sha256": "25ae0556d29b792758d95682d3974a847bdbe2773322fe863872dc1340260a32"
+    },
+    {
+      "path": "src/corrections/Forever/generated/foreverBaseObject.lua",
+      "bytes": 111486,
+      "sha256": "f589af8d868330de2ff174c7a80147539ee407ce95ddae6ba7bd602535ef0869"
+    },
+    {
+      "path": "src/corrections/Forever/generated/foreverBaseQuest.lua",
+      "bytes": 689189,
+      "sha256": "25a5eec6855e8e63098217b2dbe87b0725e2a2df61b54bb65857fef931a2e1b4"
+    },
+    {
+      "path": "src/corrections/Forever/legacy/README.md",
+      "bytes": 884,
+      "sha256": "be36b2a92db497466664e76831445f36c422a1649bed818b2bc8feeb63f42e5a"
+    },
+    {
+      "path": "src/corrections/Forever/legacy/classicItemFixes.lua",
+      "bytes": 62628,
+      "sha256": "688286a44e5d95045ff943d55ba3a9fccffce7ca4a982fa55a67499b39509b87"
+    },
+    {
+      "path": "src/corrections/Forever/legacy/classicNPCFixes.lua",
+      "bytes": 251507,
+      "sha256": "1de19d17db00581a35d397c7440124aa3f14150d5456c771d2deb3cfba79f031"
+    },
+    {
+      "path": "src/corrections/Forever/legacy/classicObjectFixes.lua",
+      "bytes": 63547,
+      "sha256": "181bea5a5db73f8af1bebe1d8aa835d28e2d4c11adf9ff786c4f54edb3cdc76a"
+    },
+    {
+      "path": "src/corrections/Forever/legacy/classicQuestFixes.lua",
+      "bytes": 317446,
+      "sha256": "76cd6a05f035826cabc6180a0ff2a1a37c5e7946c891eb0a06412fab5a4caf2e"
+    },
+    {
+      "path": "src/corrections/Forever/legacy/classicQuestReputationFixes.lua",
+      "bytes": 351294,
+      "sha256": "155b2502990304339833f65c5d5f46d6f1ad84527b9e476a976f4f9157a14322"
+    },
+    {
+      "path": "src/corrections/Forever/legacy/itemStartFixes.lua",
+      "bytes": 99433,
+      "sha256": "c5f379867c82a401432e0ba2ef58c4e44ffe878a806f4901e070f9f090523bc6"
+    },
+    {
+      "path": "src/corrections/Forever/traces/foreverItemTraces.lua",
+      "bytes": 99674,
+      "sha256": "3e1613a28649fcfb2a51d517bb9a0fd628fc0baf7bf85d86ba74b9f706f00761"
+    },
+    {
+      "path": "src/corrections/Forever/traces/foreverNpcTraces.lua",
+      "bytes": 417736,
+      "sha256": "5654db7b16036d08a8dfb327bcee7c5f643cc3fe2a6af494fabeb1157b04d9aa"
+    },
+    {
+      "path": "src/corrections/Forever/traces/foreverObjectTraces.lua",
+      "bytes": 21947,
+      "sha256": "babb02ea656a878d0d0faa9ae62deec878b931e3b997957b1b570d4901c41539"
+    },
+    {
+      "path": "src/corrections/Forever/traces/foreverQuestTraces.lua",
+      "bytes": 264516,
+      "sha256": "8c980c8a88522c6389d48cdf3e0f13b5ca9b6a0c31c729a8d2547a8e0bf25c6d"
+    },
+    {
+      "path": "src/flavors/Forever.lua",
+      "bytes": 178,
+      "sha256": "dfb4b5af58859bb4b234f9387b45cbe6891bb3115ed7ea28de0a53b33f3870bf"
+    },
+    {
+      "path": "src/support/eraToForever.lua",
+      "bytes": 2835,
+      "sha256": "d8c4727937f17e9850da11321536caeb3f560de9fb58e4169ea34df44434f2db"
+    },
+    {
+      "path": "src/support/eraToForever.test.lua",
+      "bytes": 3207,
+      "sha256": "bd73964b21146689ab6645ba994e2096f9c9902b430c5806ede3c43a7aa387cf"
+    },
+    {
+      "path": "support/Forever/DropTables/classicItemDrops.lua",
+      "bytes": 571977,
+      "sha256": "12888b91d87943b2e448dd60c6f33a21418dffc837ec7662fbd6892d91a6657f"
+    },
+    {
+      "path": "support/Forever/DropTables/itemDropCorrections.lua",
+      "bytes": 23799,
+      "sha256": "d23528afa6c89614e372d8ec96cc95768194978a034f161407529aaf12f7a6b2"
+    },
+    {
+      "path": "support/Forever/FactionTemplates/factionTemplateClassic.lua",
+      "bytes": 7360,
+      "sha256": "026489ae872c6e9025073ec54d2718bc1b8ef56007b7b6b564062fbdc807aa60"
+    },
+    {
+      "path": "support/Forever/QuestXP/xpDB-classic.lua",
+      "bytes": 357742,
+      "sha256": "9f5ca777904f6f62693cbe6f8b8ce91d0e0430e3ed5f7621df6e8691d4269149"
+    },
+    {
+      "path": "support/Forever/Zones/areaIdToUiMapId.lua",
+      "bytes": 59425,
+      "sha256": "c6f26a18a2d0d9bdf5750039eabe111f545700a751928e8f79aedb12fbb8ff09"
+    },
+    {
+      "path": "support/Forever/Zones/dungeons.lua",
+      "bytes": 13482,
+      "sha256": "9318b4ea05ca6459535bb681813de88bb988655cdbc2394b148605d65aa48236"
+    },
+    {
+      "path": "support/Forever/Zones/instanceIdToAreaId.lua",
+      "bytes": 6025,
+      "sha256": "8d83aada922f48a3ef7f604ed736963b7fc4c8d7ed9b043e3c33ad520fa779d9"
+    },
+    {
+      "path": "support/Forever/Zones/subZoneToParentZone.lua",
+      "bytes": 125714,
+      "sha256": "17a9b6369519a0dc34c17ebe0504029802afeafa3eb69eee1e8631eb71fd547a"
+    },
+    {
+      "path": "support/Forever/Zones/uiMapIdToAreaId.lua",
+      "bytes": 4770,
+      "sha256": "4964def0918a8cddef6c5f8292526a076b2afe73ea58f178f68a78e35bec39e3"
+    },
+    {
+      "path": "support/Forever/provenance.json",
+      "bytes": 50090,
+      "sha256": "5538df5af9f749a28d25c605d6f8df4e0245aa4071c90fea870b61518fa07ac5"
+    },
+    {
+      "path": "tools/dbc/fixtures/forever-reviewed-parents.lua",
+      "bytes": 2733,
+      "sha256": "75c598f40de748e7f2ba0dac4c26af8cd8df224ab38bd0179845f123cf53b59a"
+    },
+    {
+      "path": "tools/dbc/fixtures/forever-spatial-reference.json",
+      "bytes": 570,
+      "sha256": "e39cc007d2ac1d5583cb8e3b12bb228732963c72f9e80e58935004f36cc210bd"
+    },
+    {
+      "path": "tools/dbc/forever-data.test.lua",
+      "bytes": 34264,
+      "sha256": "a6b4c058c2b60d0133f68f050e610f4ab5254794dcb473fe674cd3b643e2d763"
+    },
+    {
+      "path": "tools/distribution/fixtures/forever-read.lua",
+      "bytes": 885,
+      "sha256": "5f65942c800d536055afed18576abc8755383c256fe321001d93f8e805473a72"
+    },
+    {
+      "path": "tools/distribution/forever.test.py",
+      "bytes": 4921,
+      "sha256": "0d7ba06def8356019bba0e110dc94aa49a7d43b4bebd0147f080fc72367ee91b"
+    },
+    {
+      "path": "tools/export-forever.lua",
+      "bytes": 2214,
+      "sha256": "290fd23a847fb92f4d7fe005dfd85b7332adcac76b93755b1ef5fa3ed56cd6a7"
+    },
+    {
+      "path": "tools/validation/forever-delta-base.test.lua",
+      "bytes": 14247,
+      "sha256": "7c2ad657272e05df0f369557f210621beff64ea8915f3a795f414272f8a0e3db"
+    },
+    {
+      "path": "validators/baseline/Forever.txt",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    }
+  ]
+}
