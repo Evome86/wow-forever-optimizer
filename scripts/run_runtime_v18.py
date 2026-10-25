@@ -9,7 +9,7 @@ report={'version':'1.8','generated_at_utc':datetime.datetime.now(datetime.timezo
 try:
     if not (SOURCE/'emulator/native-source.test.lua').is_file():
         raise FileNotFoundError('QuestieDB emulator/native-source.test.lua missing')
-    cmd=['lua','emulator/native-source.test.lua']
+    cmd=['lua5.1','emulator/native-source.test.lua']
     p=subprocess.run(cmd,cwd=SOURCE,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=180,errors='replace')
     report.update(command=cmd,exit_code=p.returncode, runtime_verified=p.returncode==0, log_file='reports/forever-runtime-v18.log')
     (OUT/'forever-runtime-v18.log').write_text(p.stdout,encoding='utf-8')
@@ -19,3 +19,4 @@ except Exception as exc:
 (OUT/'forever-runtime-v18.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps(report,indent=2))
 sys.exit(0 if report['runtime_verified'] else 1)
+
