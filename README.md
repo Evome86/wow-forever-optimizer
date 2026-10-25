@@ -1,9 +1,11 @@
-# Forever Optimizer v1.1 — Source verification
+# Forever Semantic Graph v1.2
 
-Upload the three files in this ZIP to the matching paths in your GitHub repository. Preserve existing scripts from v0.4, v0.8, v0.9 and v1.0.
+This is an evidence-gathering increment, **not a playable leveling guide**.
 
-Run **Actions → Forever Source Verification v1.1 → Run workflow**. Download artifact `forever-source-verification-v11`, then share `forever-source-verification-v11.json`.
+- Types raw quest references 12–16 using verified QuestieDB field names.
+- Audits the Forever correction source and inventories referenced correction keys.
+- Does **not** execute Lua, apply corrections, or claim corrected eligibility.
+- Flags fields 22, 25, 27, 28 as **not yet imported**.
+- Reports unverified XP and routing, and keeps the release gate blocked.
 
-This version collects **exact numbered source excerpts** from pinned QuestieDB metadata, docs and Forever quest/NPC/object corrections, plus runtime-consumer search pointers. The excerpts are evidence for subsequent human/code review, **not an automatic verification of prerequisite semantics**. The release gate remains blocked.
-
-Pinned QuestieDB commit: `5c094f6e9a264f0dc54e2fde9731a37a97ed197c`.
+Upload files to the existing repository with paths preserved. Run **Forever Semantic Graph v1.2** in Actions and share `forever-semantic-graph-v12.json` from the artifact.
