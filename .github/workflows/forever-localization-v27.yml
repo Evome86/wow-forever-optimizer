@@ -1,0 +1,39 @@
+name: Forever Localization and Semantics Evidence v2.7
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  localization:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Install Lua 5.1
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y lua5.1
+      - name: Run localization tests
+        run: python3 -m unittest discover -s tests -p 'test_locale_semantics_v27.py' -v
+      - name: Export native quests
+        run: python3 scripts/run_native_quest_export_v23.py
+      - name: Audit localization and source semantics
+        run: python3 scripts/build_locale_semantics_v27.py
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forever-localization-v27
+          path: |
+            reports/forever-locale-semantics-v27.json
+            reports/forever-quest-names-v27.csv
+            reports/forever-native-export-v23-report.json
+            reports/forever-native-quests-v23.log
+          if-no-files-found: warn
+          retention-days: 14
