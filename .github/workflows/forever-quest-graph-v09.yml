@@ -1,0 +1,35 @@
+name: Forever Quest Graph v0.9
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  analyze:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Test graph analyzer
+        run: python3 -m unittest discover -s tests -p 'test_quest_graph_v09.py' -v
+      - name: Import pinned quests
+        run: python3 scripts/import_quests.py
+      - name: Build v0.8 candidate filter
+        run: python3 scripts/filter_skyborne_v08.py
+      - name: Analyze raw quest references
+        run: python3 scripts/analyze_quest_graph_v09.py
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forever-quest-graph-v09
+          path: |
+            reports/forever-quest-graph-v09.json
+            reports/forever-skyborne-v08.json
+          if-no-files-found: warn
+          retention-days: 14
