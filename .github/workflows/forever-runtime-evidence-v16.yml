@@ -1,0 +1,33 @@
+name: Forever Runtime Evidence v1.6
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - name: Test v1.6
+        run: python3 -m unittest discover -s tests -p 'test_runtime_evidence_v16.py' -v
+      - name: Import Forever quests
+        run: python3 scripts/import_quests.py
+      - name: Build v1.5 overlay
+        run: python3 scripts/build_correction_overlay_v15.py
+      - name: Audit runtime evidence and prerequisite closure
+        run: python3 scripts/audit_runtime_evidence_v16.py
+      - name: Upload v1.6 report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forever-runtime-evidence-v16
+          path: reports/forever-runtime-evidence-v16.json
+          if-no-files-found: warn
+          retention-days: 14
