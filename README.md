@@ -1,8 +1,10 @@
-# WoW Forever Optimizer v1.6 — Runtime Evidence & Race Audit
+# WoW Forever Optimizer v1.7 – Runtime Semantics Source Probe
 
-A conservative **source evidence** audit. Searches Lua source for race constants and loader references, and expands up to three rounds of literal quest dependency IDs from the seven known Skyborne quests. Every finding includes source paths and line numbers. **Does not execute Lua, resolve bitmasks, infer loader order, certify playable quests, or calculate XP.** The 94414 `raceIDs.NONE` override remains unresolved.
+Focused, source-line-based audit for **Horde Skyborne**. Searches race-related files for actual race symbol declarations (avoiding unrelated NPC `NONE`), finds config/loader references and relevant merge code, and records exact quest blocks for 94414, 92595, 92871 and 93836.
 
-## Install
-Unzip at the root of your existing repository, preserving paths; keep all earlier version files (particularly `scripts/import_quests.py` and `scripts/build_correction_overlay_v15.py`). Commit. In GitHub Actions run **Forever Runtime Evidence v1.6**. Download artifact `forever-runtime-evidence-v16` and upload `forever-runtime-evidence-v16.json` to this conversation.
+**Evidence-only**: this release deliberately does not claim to have executed Lua, resolved race masks, proved patch precedence, or validated route eligibility. The 94414 conflict remains an open question until runtime semantics are verified.
 
-Pinned QuestieDB: `5c094f6e9a264f0dc54e2fde9731a37a97ed197c`. Python standard library only.
+## Installation
+Extract this ZIP into the root of the existing `Evome86/wow-forever-optimizer` repository, preserving directory structure; commit. In GitHub Actions run **Forever Runtime Semantics v1.7**, download artifact `forever-runtime-semantics-v17`, and upload `forever-runtime-semantics-v17.json` here.
+
+Pinned upstream QuestieDB commit: `5c094f6e9a264f0dc54e2fde9731a37a97ed197c`. Python standard library only. No paid API.
