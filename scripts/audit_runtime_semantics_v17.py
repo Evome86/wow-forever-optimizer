@@ -31,10 +31,12 @@ def build(root, prior=None):
     root=Path(root); files={}; errors=[]
     for p in sorted(root.rglob('*.lua')):
         rel=p.relative_to(root).as_posix()
-        if any(part in ('vendor','.git') for part in p.parts):continue
+        if any(part in ('.git','__pycache__') for part in p.relative_to(root).parts):continue
         try: s=p.read_text(encoding='utf-8')
         except (UnicodeError,OSError):continue
         files[rel]=s
+    if not files:
+        raise RuntimeError(f'No Lua sources found in {root.resolve()}; verify QuestieDB checkout')
     # Search relevant code only, never truncate based on unrelated NONE occurrences.
     race=[]; loaders=[]; merge=[]
     for rel,s in files.items():
@@ -55,6 +57,8 @@ def build(root, prior=None):
             block['file']=rel
             block['field_lines']=[x for x in block['lines'] if any('questKeys.'+f in x['text'] for f in QUEST_FIELDS)]
             blocks.append(block)
+    if errors:
+        raise RuntimeError('Missing required QuestieDB files: ' + '; '.join(errors))
     # Exact source locations of symbolic constants; no assumption about values or NONE.
     definitions=[]
     pattern=re.compile(r'\b(?:'+ '|'.join(SYMBOLS)+r')\s*=\s*[^,}\n]+')
