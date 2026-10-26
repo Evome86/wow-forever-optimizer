@@ -1,0 +1,12 @@
+"use strict";
+const $=id=>document.getElementById(id);let quests=[];const imported=[];
+function text(id,value){$(id).textContent=value}
+function escape(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function parseQuests(data){
+ const list=Array.isArray(data)?data:(Array.isArray(data.quests)?data.quests:null);
+ if(!list)return null;
+ return list.map(q=>({id:q.id??q.questId??q.quest_id??'',name:q.name_de??q.name_en??q.name??q.title??'Unbenannt',level:q.level??q.questLevel??'?'})).filter(q=>q.id!=='').slice(0,100000);
+}
+function render(){const query=$('search').value.trim().toLowerCase();const matches=quests.filter(q=>String(q.id).includes(query)||String(q.name).toLowerCase().includes(query)).slice(0,100);text('questCount',quests.length?`${quests.length} Quest-Datensätze importiert · maximal 100 Treffer angezeigt · Verfügbarkeit unbekannt`:'Questdaten noch nicht geladen.');$('quests').innerHTML=matches.map(q=>`<div class="quest"><span><b>#${escape(q.id)}</b> ${escape(q.name)} <small>· Level ${escape(q.level)}</small></span><em>NICHT VERIFIZIERT</em></div>`).join('')}
+$('search').addEventListener('input',render);
+$('file').addEventListener('change',async e=>{for(const file of e.target.files){try{const data=JSON.parse(await file.text());if(data.version==='4.0'&&Array.isArray(data.tests)){const pass=data.tests.filter(t=>t.parity===true&&typeof t.lua_actual==='boolean').length;text('parity',`${pass}/${data.tests.length}`);imported.push(`${file.name}: ${pass}/${data.tests.length} bestätigt`)}else if(data.version==='4.1'&&data.kind==='static_source_audit_only'){text('isdoable','Quellcode erfasst');const items=Object.entries(data.condition_evidence||{}).map(([k,v])=>`<div class="quest"><b>${escape(k)}</b><span>${Array.isArray(v)?v.length:0} Fundstellen</span></div>`).join('');$('audit').innerHTML=`<p>IsDoable: Zeilen ${escape(data.source_start_line)}–${escape(data.source_end_line)} · ${escape(data.source_sha256||'')}</p>${items}<p>⚠️ Nur statischer Audit. Keine Laufzeit- oder Ingame-Freigabe.</p>`;imported.push(`${file.name}: statischer Audit geladen`)}else{const found=parseQuests(data);if(found){quests=found;render();imported.push(`${file.name}: ${found.length} Quests`)}else imported.push(`${file.name}: JSON erkannt, kein unterstütztes Format`)}}catch(err){imported.push(`${file.name}: FEHLER ${err.message}`)}}text('imports',imported.join(' · '));e.target.value=''});
