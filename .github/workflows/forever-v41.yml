@@ -1,0 +1,41 @@
+name: Forever v4.1 IsDoable Audit and GUI
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/QuestieDB
+          ref: 5c094f6e9a264f0dc54e2fde9731a37a97ed197c
+          path: vendor/QuestieDB
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Questie/Questie
+          ref: 30ac9acb7107fdfdd0cfff4d1e03d9bf60b0e374
+          path: vendor/Questie
+          persist-credentials: false
+      - name: Run regression tests
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -q
+      - name: Record pinned revisions
+        run: |
+          git -C vendor/Questie rev-parse HEAD > addon-commit-v41.txt
+          git -C vendor/QuestieDB rev-parse HEAD > db-commit-v41.txt
+      - name: Audit complete IsDoable source (static, fail closed)
+        run: |
+          python3 scripts/audit_isdoable_v41.py --addon-sha "$(cat addon-commit-v41.txt)" --db-sha "$(cat db-commit-v41.txt)"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: forever-v41-isdoable-source-evidence
+          path: |
+            reports/forever-v41-isdoable-audit.json
+            addon-commit-v41.txt
+            db-commit-v41.txt
+          retention-days: 14
