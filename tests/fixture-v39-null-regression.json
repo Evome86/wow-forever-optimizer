@@ -1,0 +1,195 @@
+{
+  "version": "3.9",
+  "type": "source_verified_isolated_lua_execution",
+  "addon_commit": "30ac9acb7107fdfdd0cfff4d1e03d9bf60b0e374",
+  "definitions": {
+    "race": {
+      "path": "vendor/Questie/Modules/QuestiePlayer.lua",
+      "line": 88
+    },
+    "single": {
+      "path": "vendor/Questie/Database/QuestieDB.lua",
+      "line": 632
+    },
+    "group": {
+      "path": "vendor/Questie/Database/QuestieDB.lua",
+      "line": 597
+    }
+  },
+  "tests": [
+    {
+      "name": "race_unrestricted_none",
+      "reference_expected": true,
+      "lua_status": "EXECUTED",
+      "lua_actual": true,
+      "parity": true,
+      "error": null
+    },
+    {
+      "name": "race_unrestricted_zero",
+      "reference_expected": true,
+      "lua_status": "EXECUTED",
+      "lua_actual": true,
+      "parity": true,
+      "error": null
+    },
+    {
+      "name": "race_horde",
+      "reference_expected": true,
+      "lua_status": "EXECUTED",
+      "lua_actual": true,
+      "parity": true,
+      "error": null
+    },
+    {
+      "name": "race_alliance",
+      "reference_expected": false,
+      "lua_status": "EXECUTED",
+      "lua_actual": null,
+      "parity": null,
+      "error": null
+    },
+    {
+      "name": "race_both",
+      "reference_expected": true,
+      "lua_status": "EXECUTED",
+      "lua_actual": true,
+      "parity": true,
+      "error": null
+    },
+    {
+      "name": "race_other_low_bit",
+      "reference_expected": false,
+      "lua_status": "EXECUTED",
+      "lua_actual": null,
+      "parity": null,
+      "error": null
+    },
+    {
+      "name": "race_horde_with_low_bit",
+      "reference_expected": true,
+      "lua_status": "EXECUTED",
+      "lua_actual": true,
+      "parity": true,
+      "error": null
+    },
+    {
+      "name": "race_horde_with_higher_bit",
+      "reference_expected": true,
+      "lua_status": "EXECUTED",
+      "lua_actual": true,
+      "parity": true,
+      "error": null
+    },
+    {
+      "name": "prereq_empty",
+      "reference_expected": true,
+      "lua_status": "EXECUTED",
+      "lua_actual": true,
+      "parity": true,
+      "error": null
+    },
+    {
+      "name": "single_or_pass",
+      "reference_expected": true,
+      "lua_status": "EXECUTED",
+      "lua_actual": true,
+      "parity": true,
+      "error": null
+    },
+    {
+      "name": "single_or_fail",
+      "reference_expected": false,
+      "lua_status": "EXECUTED",
+      "lua_actual": null,
+      "parity": null,
+      "error": null
+    },
+    {
+      "name": "group_and_pass",
+      "reference_expected": true,
+      "lua_status": "EXECUTED",
+      "lua_actual": true,
+      "parity": true,
+      "error": null
+    },
+    {
+      "name": "group_and_fail",
+      "reference_expected": false,
+      "lua_status": "EXECUTED",
+      "lua_actual": null,
+      "parity": null,
+      "error": null
+    },
+    {
+      "name": "combined_pass",
+      "reference_expected": true,
+      "lua_status": "EXECUTED",
+      "lua_actual": true,
+      "parity": true,
+      "error": null
+    },
+    {
+      "name": "combined_fail",
+      "reference_expected": false,
+      "lua_status": "EXECUTED",
+      "lua_actual": null,
+      "parity": null,
+      "error": null
+    },
+    {
+      "name": "negative_group_exact_pass",
+      "reference_expected": true,
+      "lua_status": "EXECUTED",
+      "lua_actual": true,
+      "parity": true,
+      "error": null
+    },
+    {
+      "name": "negative_group_exact_fail",
+      "reference_expected": false,
+      "lua_status": "EXECUTED",
+      "lua_actual": null,
+      "parity": null,
+      "error": null
+    },
+    {
+      "name": "positive_group_exclusive_pass",
+      "reference_expected": true,
+      "lua_status": "EXECUTED",
+      "lua_actual": true,
+      "parity": true,
+      "error": null
+    },
+    {
+      "name": "positive_group_exclusive_fail",
+      "reference_expected": false,
+      "lua_status": "EXECUTED",
+      "lua_actual": null,
+      "parity": null,
+      "error": null
+    }
+  ],
+  "executed": 19,
+  "total": 19,
+  "mismatches": [],
+  "errors": [],
+  "runtime_error_count": 0,
+  "technical_gate": "PASS_ISOLATED_FUNCTION_PARITY_ONLY",
+  "ingame_gate": "BLOCKED_NOT_VERIFIED",
+  "route_gate": "BLOCKED",
+  "mock_inputs": {
+    "playerRaceFlag": 8589934592,
+    "playerRaceFlagX2": 17179869184,
+    "Questie.db.char.complete": "controlled completed quest IDs",
+    "QuestieDB.QueryQuestSingle": "exclusiveTo field only"
+  },
+  "mock_provenance": "SOURCE_STRUCTURES_CONFIRMED_VALUES_TEST_INPUTS",
+  "limitations": [
+    "Executes original extracted function bodies under isolated local variables and completion-state mocks; not full addon initialization.",
+    "Lua local race flag is a test input derived from Skyborne Horde bit; actual player initialization and class selection not executed.",
+    "Questie addon commit not proven identical to Forever client addon.",
+    "No quest availability or actual game behavior certified."
+  ],
+  "source_context_file": "reports/forever-v39-source-context.json"
+}
